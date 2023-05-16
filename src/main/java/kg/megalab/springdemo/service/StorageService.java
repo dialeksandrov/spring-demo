@@ -4,8 +4,6 @@ import java.util.List;
 
 public interface StorageService {
 
-    String getCats();
-
     List<String> getList();
 
     void addToList(String str);
