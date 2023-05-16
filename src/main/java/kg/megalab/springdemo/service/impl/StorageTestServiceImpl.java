@@ -12,11 +12,6 @@ import java.util.List;
 public class StorageTestServiceImpl implements StorageService {
 
     @Override
-    public String getCats() {
-        return null;
-    }
-
-    @Override
     public List<String> getList() {
         return null;
     }

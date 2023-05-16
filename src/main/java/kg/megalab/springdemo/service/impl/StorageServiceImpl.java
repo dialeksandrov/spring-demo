@@ -18,15 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class StorageServiceImpl implements StorageService {
 
-    private final RestTemplate restTemplate;
-
     private List<String> list = new ArrayList<>();
-
-    public String getCats() {
-        ResponseEntity<String> response =
-                restTemplate.exchange("https://cat-fact.herokuapp.com/facts", HttpMethod.GET, null, String.class);
-        return response.getBody();
-    }
 
     public List<String> getList() {
         if (list.isEmpty()) {
