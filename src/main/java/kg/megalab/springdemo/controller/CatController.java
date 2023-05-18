@@ -2,7 +2,8 @@ package kg.megalab.springdemo.controller;
 
 import kg.megalab.springdemo.model.RestResponse;
 import kg.megalab.springdemo.service.CatService;
-import lombok.RequiredArgsConstructor;
+import kg.megalab.springdemo.service.StorageService;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -12,10 +13,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/cats")
-@RequiredArgsConstructor
 public class CatController {
 
     private final CatService catService;
+
+    @Qualifier("storageService")
+    private final StorageService storageService;
+
+    public CatController(CatService catService, StorageService storageService) {
+        this.catService = catService;
+        this.storageService = storageService;
+    }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getCats() {
@@ -24,5 +32,10 @@ public class CatController {
         } catch (Exception e) {
             return new ResponseEntity<>(new RestResponse<>().error("List is empty"), HttpStatus.NO_CONTENT);
         }
+    }
+
+    @GetMapping(value = "/get", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getAllStrings() {
+        return new ResponseEntity<>(storageService.getList(), HttpStatus.OK);
     }
 }

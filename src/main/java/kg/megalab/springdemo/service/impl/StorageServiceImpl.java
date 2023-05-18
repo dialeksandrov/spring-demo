@@ -4,11 +4,7 @@ import kg.megalab.springdemo.exception.EmptyListException;
 import kg.megalab.springdemo.service.StorageService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +18,7 @@ public class StorageServiceImpl implements StorageService {
 
     public List<String> getList() {
         if (list.isEmpty()) {
-            throw new  EmptyListException("List is empty");
+            throw new EmptyListException("List is empty");
         }
         return list;
     }

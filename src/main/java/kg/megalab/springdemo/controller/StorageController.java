@@ -1,6 +1,5 @@
 package kg.megalab.springdemo.controller;
 
-import kg.megalab.springdemo.exception.EmptyListException;
 import kg.megalab.springdemo.service.StorageService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -23,13 +22,7 @@ public class StorageController {
 
     @GetMapping(value = "/get", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getAllStrings() {
-        try {
-            return new ResponseEntity<>(storageService.getList(), HttpStatus.OK);
-        } catch (EmptyListException e) {
-            log.error(e.getMessage());
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.NO_CONTENT);
-        }
-
+        return new ResponseEntity<>(storageService.getList(), HttpStatus.OK);
     }
 
     @PostMapping(value = "/add")
@@ -47,5 +40,4 @@ public class StorageController {
     public ResponseEntity<Boolean> isExist(@PathVariable String str) {
         return new ResponseEntity<>(storageService.isExistInList(str), HttpStatus.OK);
     }
-
 }
