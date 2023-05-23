@@ -18,7 +18,7 @@ public class StorageServiceImpl implements StorageService {
 
     public List<String> getList() {
         if (list.isEmpty()) {
-            throw new EmptyListException("List is empty");
+            throw new EmptyListException("empty.list");
         }
         return list;
     }
