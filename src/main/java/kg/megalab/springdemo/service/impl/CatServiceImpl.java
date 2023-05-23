@@ -3,7 +3,6 @@ package kg.megalab.springdemo.service.impl;
 import kg.megalab.springdemo.model.cats.CatResponse;
 import kg.megalab.springdemo.model.cats.Cats;
 import kg.megalab.springdemo.service.CatService;
-import kg.megalab.springdemo.service.StorageService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -30,6 +29,9 @@ public class CatServiceImpl implements CatService {
     public List<CatResponse> getCats() {
         ResponseEntity<Cats[]> response = restTemplate.exchange(catsUrl, HttpMethod.GET, null, Cats[].class);
         if (response != null && response.hasBody()) {
+            for (Cats cats : response.getBody()) {
+                log.info(cats.toString());
+            }
             return Arrays.stream(response.getBody()).map(CatResponse::new).collect(Collectors.toList());
         }
         return Collections.EMPTY_LIST;
